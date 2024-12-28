@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Compte Management</title>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+	<link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+	<div class="container mt-5 col-9">
+		<h1 class="text-center">Compte Management</h1>
+
+		<!-- Form to Add/Update Compte -->
+		<div class="card mb-4">
+			<div class="card-header">
+				Ajouter un Compte
+			</div>
+			<div class="card-body">
+				<form th:action="@{/compte/save}" method="post">
+					<div class="mb-3">
+						<label for="rib" class="form-label">RIB</label>
+						<div class="input-group">
+							<input type="number" class="form-control" id="rib" name="rib" placeholder="Enter RIB"
+								required>
+							<button type="button" class="btn btn-secondary" onclick="generateRib()">Generate</button>
+						</div>
+					</div>
+					<div class="mb-3">
+						<label for="userId" class="form-label">Nom du Client</label>
+						<select class="form-select" id="userId" name="userId" th:required="true"
+							th:onchange="updateNomClient()">
+							<option value="" disabled selected>Select User</option>
+							<option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}"></option>
+						</select>
+					</div>
+					<div class="mb-3">
+						<label for="solde" class="form-label">Solde</label>
+						<input type="number" class="form-control" id="solde" name="solde" placeholder="Enter Solde"
+							step="0.01" required>
+					</div>
+					<button type="submit" class="btn btn-primary">Add Compte</button>
+				</form>
+			</div>
+		</div>
+
+		<!-- List of Comptes -->
+		<div class="card">
+			<div class="card-header">
+				Liste des Comptes
+			</div>
+			<div class="card-body">
+				<table class="table table-bordered table-striped">
+					<thead class="table-dark">
+						<tr>
+							<th>RIB</th>
+							<th>Nom du Client</th>
+							<th>Solde</th>
+
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody id="compte-list">
+						<!-- Loop through comptes -->
+						<tr th:each="compte : ${comptes}" th:id="'row-' + ${compte.rib}">
+							<td th:text="${compte.rib}"></td>
+							<td th:text="${compte.nomClient}"></td>
+							<td th:text="${compte.solde}"></td>
+
+							<td class="table-actions">
+								<a th:href="@{/compte/edit/{rib}(rib=${compte.rib})}"
+									class="btn btn-warning btn-sm">Edit</a>
+								<a th:href="@{/compte/delete/{rib}(rib=${compte.rib})}" class="btn btn-danger btn-sm"
+									onclick="return confirm('Are you sure?')">Delete</a>
+								<a class="btn btn-danger btn-sm"
+									th:href="'javascript:deleteCompte('+${compte.rib}+')'">delete-Ajax</a>
+							</td>
+						</tr>
+						<!-- Show message if no comptes exist -->
+						<tr th:if="${#lists.isEmpty(comptes)}">
+							<td colspan="5" class="text-center">No comptes found</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+	<script>
+		// Function to generate random RIB and populate it in the input field
+		function generateRib() {
+			const rib = Math.floor(Math.random() * 9000000) + 1000000; // Generate a 10-digit number
+			document.getElementById("rib").value = rib; // Set the value in the RIB input field
+		}
+
+		// Attach the generateRib function to the button click event
+		document.getElementById("generateButton").addEventListener("click", generateRib);
+
+		function deleteCompte(rib) {
+			swal({
+				title: "Are you sure?",
+				text: "Once deleted, you will not be able to recover this compte!",
+				icon: "warning",
+				buttons: true,
+				dangerMode: true,
+			}).then((willDelete) => {
+				if (willDelete) {
+					$.ajax({
+						url: `/compte/delete-ajax/${rib}`,
+						type: 'DELETE',
+						success: function () {
+							// Remove the corresponding row from the table
+							document.getElementById(`row-${rib}`).remove();
+							swal("Success! The compte has been deleted!", {
+								icon: "success",
+							});
+						},
+						error: function () {
+							swal("Error! Unable to delete the compte. Please try again.", {
+								icon: "error",
+							});
+						}
+					});
+				} else {
+					swal("Your compte is safe!");
+				}
+			});
+		}
+	</script>
+</body>
+
+</html>

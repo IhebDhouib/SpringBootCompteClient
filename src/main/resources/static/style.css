@@ -1,0 +1,258 @@
+		body {
+
+			    font-family: 'Arial', sans-serif;
+
+			    background: linear-gradient(135deg, #f8f9fa, rgb(44, 186, 211)); /* Couleurs bancaires */
+
+			    color: #fff;
+
+			    min-height: 100vh;
+
+			    margin: 0;
+
+			    display: flex;
+
+			    justify-content: center;
+
+			    align-items: center;
+
+			}
+
+			.btn.btn-secondary {
+			    background-color: #007bff;
+			    border-color: #007bff; /* Optional: if you want to change the border color too */
+			    color: white; /* Optional: to ensure the text is visible */
+			}
+
+			.container {
+
+			    background: #f8f9fa; /* Fond clair pour contraster */
+
+			    border-radius: 10px;
+
+			    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+			    padding: 30px;
+
+			    width: 100%;
+
+			    max-width: 600px;
+
+			    color: #333;
+
+			}
+
+
+
+			h1, h3 {
+
+			    text-align: center;
+
+			    color: #007bff;
+
+			    margin-bottom: 20px;
+
+			}
+
+
+
+			.card {
+
+			    background: #fff;
+
+			    border: none;
+
+			    border-radius: 10px;
+
+			    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+			    overflow: hidden;
+
+			}
+
+
+
+			.card-header {
+
+			    background: #007bff;
+
+			    color: #fff;
+
+			    padding: 15px;
+
+			    font-size: 18px;
+
+			    font-weight: bold;
+
+			    text-align: center;
+
+			}
+
+
+
+			.card-body {
+
+			    padding: 20px;
+
+			}
+
+
+
+			.form-label {
+
+			    font-weight: bold;
+
+			    color: #007bff;
+
+			}
+
+
+
+			.form-control {
+
+			    border-radius: 5px;
+
+			    border: 1px solid #ddd;
+
+			    padding: 10px;
+
+			    font-size: 16px;
+
+			    color: #333;
+
+			}
+
+
+
+			.form-control:focus {
+
+			    border-color: #007bff;
+
+			    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+
+			}
+
+
+
+			button.btn-primary {
+
+			    background: #007bff;
+
+			    border: none;
+
+			    padding: 10px 20px;
+
+			    font-size: 16px;
+
+			    font-weight: bold;
+
+			    color: #fff;
+
+			    border-radius: 5px;
+
+			    width: 100%;
+
+			    transition: background 0.3s ease;
+
+			}
+
+
+
+			button.btn-primary:hover {
+
+			    background: #0056b3;
+
+			    cursor: pointer;
+
+			}
+
+
+
+			.table {
+
+			    margin-top: 20px;
+
+			    border-radius: 5px;
+
+			    overflow: hidden;
+				width: 102%;
+
+			}
+			.table-actions {
+			    display: flex; /* Utiliser un conteneur flex pour aligner les boutons */
+			    gap: 2px; /* Ajouter un espacement entre les boutons */
+			    justify-content: center; /* Centrer horizontalement */
+			    align-items: center; /* Aligner verticalement */
+			}
+
+			
+
+
+
+			.table-bordered {
+
+			    background: #fff;
+
+			    color: #333;
+
+			    border: none;
+
+			}
+
+
+
+			.table-dark th {
+
+			    background: #007bff;
+
+			    color: #fff;
+
+			}
+
+
+
+			.btn {
+
+			    padding: 5px 10px;
+
+			    font-size: 14px;
+
+			    border-radius: 5px;
+
+			}
+
+
+
+			.btn-warning {
+
+			    background: #ffc107;
+
+			    color: #fff;
+
+			}
+
+
+
+			.btn-warning:hover {
+
+			    background: #e0a800;
+
+			}
+
+
+
+			.btn-danger {
+
+			    background: #dc3545;
+
+			    color: #fff;
+
+			}
+
+
+
+			.btn-danger:hover {
+
+			    background: #bd2130;
+
+			}
